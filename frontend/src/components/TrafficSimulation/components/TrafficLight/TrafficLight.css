@@ -1,0 +1,71 @@
+.traffic-light-center {
+  position: absolute;
+  z-index: 30;
+  left: 50%;
+  top: 50%;
+  width: 86px;
+  height: 86px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.signal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 18px;
+  padding: 4px;
+  border-radius: 8px;
+  background: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.signal span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.22;
+}
+
+.signal span.active {
+  opacity: 1;
+}
+
+.red {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+}
+
+.yellow {
+  background: #facc15;
+}
+
+.green {
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+}
+
+.signal-north {
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.signal-south {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.signal-east {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.signal-west {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+}

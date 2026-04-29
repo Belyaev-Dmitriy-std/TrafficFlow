@@ -1,0 +1,40 @@
+.intersection-node {
+  position: absolute;
+  z-index: 8;
+  width: 174px;
+  height: 174px;
+  transform: translate(-50%, -50%);
+  border-radius: 26px;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(250, 204, 21, 0.65) 49.5%, rgba(250, 204, 21, 0.65) 50.5%, transparent 51%),
+    linear-gradient(0deg, transparent 49%, rgba(250, 204, 21, 0.65) 49.5%, rgba(250, 204, 21, 0.65) 50.5%, transparent 51%),
+    #333842;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+.intersection-node__title {
+  position: absolute;
+  left: 50%;
+  top: -34px;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.9);
+  color: #93c5fd;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.intersection-node__phase {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.8);
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 800;
+}

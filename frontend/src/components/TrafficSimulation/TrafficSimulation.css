@@ -1,0 +1,428 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #07111f;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.traffic-page {
+  min-height: 100vh;
+  padding: 42px 20px;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(37, 99, 235, 0.24), transparent 30%),
+    radial-gradient(circle at 85% 90%, rgba(14, 165, 233, 0.16), transparent 34%),
+    #07111f;
+}
+
+.traffic-header {
+  width: min(1240px, 100%);
+  margin: 0 auto 28px;
+}
+
+.traffic-header span {
+  display: inline-flex;
+  padding: 8px 14px;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.16);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  color: #93c5fd;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.traffic-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(38px, 5vw, 68px);
+  letter-spacing: -0.06em;
+}
+
+.traffic-header p {
+  max-width: 720px;
+  margin: 0;
+  color: #94a3b8;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.city-layout {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.city-map {
+  position: relative;
+  height: 720px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 34px;
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.025) 25%, transparent 25%),
+    #0b1220;
+  background-size: 42px 42px;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.38);
+}
+
+/* соединённые дороги */
+
+.city-road {
+  position: absolute;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(255, 255, 255, 0.14) 49%, rgba(255, 255, 255, 0.14) 51%, transparent 52%),
+    #2a2f38;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.city-road--horizontal {
+  left: 0;
+  width: 100%;
+  height: 90px;
+}
+
+.city-road--top {
+  top: 28%;
+  transform: translateY(-50%);
+}
+
+.city-road--bottom {
+  top: 72%;
+  transform: translateY(-50%);
+}
+
+.city-road--vertical {
+  top: 0;
+  height: 100%;
+  width: 90px;
+  background:
+    linear-gradient(0deg, transparent 48%, rgba(255, 255, 255, 0.14) 49%, rgba(255, 255, 255, 0.14) 51%, transparent 52%),
+    #2a2f38;
+}
+
+.city-road--left {
+  left: 28%;
+  transform: translateX(-50%);
+}
+
+.city-road--right {
+  left: 72%;
+  transform: translateX(-50%);
+}
+
+/* перекрёстки */
+
+.intersection-node {
+  position: absolute;
+  z-index: 5;
+  width: 164px;
+  height: 164px;
+  transform: translate(-50%, -50%);
+  border-radius: 24px;
+  background: #333842;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 0 0 999px transparent,
+    0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+.intersection-node__title {
+  position: absolute;
+  left: 50%;
+  top: -34px;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.9);
+  color: #93c5fd;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.intersection-node__phase {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.8);
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* очереди */
+
+.queue {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.queue b {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: #020617;
+  color: #e0f2fe;
+  font-size: 14px;
+}
+
+.queue-north {
+  top: -94px;
+  left: 50%;
+  flex-direction: column;
+  transform: translateX(-50%);
+}
+
+.queue-south {
+  bottom: -94px;
+  left: 50%;
+  flex-direction: column-reverse;
+  transform: translateX(-50%);
+}
+
+.queue-east {
+  right: -132px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.queue-west {
+  left: -132px;
+  top: 50%;
+  flex-direction: row-reverse;
+  transform: translateY(-50%);
+}
+
+.cars {
+  display: flex;
+  gap: 6px;
+}
+
+.cars-vertical {
+  flex-direction: column;
+}
+
+/* нормальные машинки */
+
+.car {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #60a5fa, #2563eb);
+  box-shadow:
+    0 0 14px rgba(37, 99, 235, 0.5),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+  animation: carPulse 0.7s steps(2, end) infinite;
+}
+
+.car-horizontal {
+  width: 32px;
+  height: 18px;
+}
+
+.car-vertical {
+  width: 18px;
+  height: 32px;
+}
+
+.car span {
+  position: absolute;
+  border-radius: 4px;
+  background: rgba(219, 234, 254, 0.95);
+}
+
+.car-horizontal span {
+  width: 10px;
+  height: 8px;
+  left: 8px;
+  top: 5px;
+}
+
+.car-vertical span {
+  width: 8px;
+  height: 10px;
+  left: 5px;
+  top: 8px;
+}
+
+.car::before,
+.car::after {
+  content: "";
+  position: absolute;
+  background: #020617;
+  border-radius: 999px;
+}
+
+.car-horizontal::before,
+.car-horizontal::after {
+  width: 5px;
+  height: 5px;
+  bottom: -2px;
+}
+
+.car-horizontal::before {
+  left: 6px;
+}
+
+.car-horizontal::after {
+  right: 6px;
+}
+
+.car-vertical::before,
+.car-vertical::after {
+  width: 5px;
+  height: 5px;
+  right: -2px;
+}
+
+.car-vertical::before {
+  top: 6px;
+}
+
+.car-vertical::after {
+  bottom: 6px;
+}
+
+@keyframes carPulse {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  50% {
+    transform: translateX(2px) translateY(1px);
+  }
+
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* светофоры ровно возле центра */
+
+.traffic-light {
+  position: absolute;
+  z-index: 15;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 9px;
+  background: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.traffic-light i {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.green {
+  background: #22c55e;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.85);
+}
+
+.red {
+  background: #ef4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.85);
+}
+
+.light-north {
+  left: 102px;
+  top: 48px;
+}
+
+.light-south {
+  left: 36px;
+  top: 90px;
+}
+
+.light-east {
+  left: 90px;
+  top: 90px;
+}
+
+.light-west {
+  left: 48px;
+  top: 36px;
+}
+
+/* панель */
+
+.city-panel {
+  position: sticky;
+  top: 24px;
+  padding: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 28px;
+  background: rgba(15, 23, 42, 0.82);
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.38);
+}
+
+.city-panel h2 {
+  margin: 0 0 18px;
+  font-size: 24px;
+}
+
+.city-panel__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.city-panel__row span {
+  color: #94a3b8;
+}
+
+.city-panel__decision {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(37, 99, 235, 0.14);
+  border: 1px solid rgba(96, 165, 250, 0.26);
+}
+
+.city-panel__decision span {
+  display: block;
+  margin-bottom: 8px;
+  color: #93c5fd;
+  font-weight: 800;
+}
+
+.city-panel__decision p {
+  margin: 0;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .city-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .city-panel {
+    position: static;
+  }
+
+  .city-map {
+    height: 620px;
+  }
+}

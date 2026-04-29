@@ -1,0 +1,268 @@
+.city-map {
+  position: relative;
+  height: 880px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(37, 99, 235, 0.12), transparent 24%),
+    radial-gradient(circle at 80% 85%, rgba(14, 165, 233, 0.1), transparent 26%),
+    #0b1220;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.38);
+}
+
+.map-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: 0.8;
+}
+
+/* Roads: 2 lanes each direction */
+
+.city-road {
+  position: absolute;
+  z-index: 3;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(250, 204, 21, 0.75) 49.4%, rgba(250, 204, 21, 0.75) 50.6%, transparent 51%),
+    #2a2f38;
+  border: 1px solid rgba(255,255,255,0.055);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+.city-road::before,
+.city-road::after {
+  content: "";
+  position: absolute;
+  background: rgba(226, 232, 240, 0.2);
+}
+
+.city-road--horizontal {
+  left: 0;
+  width: 100%;
+  height: 132px;
+}
+
+.city-road--horizontal::before {
+  left: 0;
+  right: 0;
+  top: 33%;
+  height: 1px;
+}
+
+.city-road--horizontal::after {
+  left: 0;
+  right: 0;
+  bottom: 33%;
+  height: 1px;
+}
+
+.city-road--top {
+  top: 28%;
+  transform: translateY(-50%);
+}
+
+.city-road--bottom {
+  top: 72%;
+  transform: translateY(-50%);
+}
+
+.city-road--vertical {
+  top: 0;
+  height: 100%;
+  width: 132px;
+  background:
+    linear-gradient(0deg, transparent 49%, rgba(250, 204, 21, 0.75) 49.4%, rgba(250, 204, 21, 0.75) 50.6%, transparent 51%),
+    #2a2f38;
+}
+
+.city-road--vertical::before {
+  top: 0;
+  bottom: 0;
+  left: 33%;
+  width: 1px;
+}
+
+.city-road--vertical::after {
+  top: 0;
+  bottom: 0;
+  right: 33%;
+  width: 1px;
+}
+
+.city-road--left {
+  left: 28%;
+  transform: translateX(-50%);
+}
+
+.city-road--right {
+  left: 72%;
+  transform: translateX(-50%);
+}
+
+/* dashed lane marks */
+
+.mark {
+  position: absolute;
+  display: block;
+  opacity: 0.55;
+}
+
+.mark.h {
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(241, 245, 249, 0.75) 0 22px,
+    transparent 22px 42px
+  );
+}
+
+.mark.h1 {
+  top: 25%;
+}
+
+.mark.h2 {
+  top: 50%;
+  opacity: 0;
+}
+
+.mark.h3 {
+  top: 75%;
+}
+
+.mark.v {
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(241, 245, 249, 0.75) 0 22px,
+    transparent 22px 42px
+  );
+}
+
+.mark.v1 {
+  left: 25%;
+}
+
+.mark.v2 {
+  left: 50%;
+  opacity: 0;
+}
+
+.mark.v3 {
+  left: 75%;
+}
+
+/* Buildings */
+
+.building {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.building::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 12px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(147, 197, 253, 0.18) 0 8px,
+      transparent 8px 18px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(147, 197, 253, 0.13) 0 8px,
+      transparent 8px 20px
+    );
+  opacity: 0.7;
+}
+
+.building span {
+  position: relative;
+  z-index: 2;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.72);
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.b1 {
+  left: 6%;
+  top: 6%;
+  width: 15%;
+  height: 13%;
+}
+
+.b2 {
+  left: 36%;
+  top: 6%;
+  width: 19%;
+  height: 13%;
+}
+
+.b3 {
+  right: 6%;
+  top: 6%;
+  width: 14%;
+  height: 13%;
+}
+
+.b4 {
+  left: 5%;
+  top: 38%;
+  width: 15%;
+  height: 20%;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(34, 197, 94, 0.45), transparent 18%),
+    radial-gradient(circle at 70% 65%, rgba(22, 163, 74, 0.35), transparent 20%),
+    rgba(20, 83, 45, 0.4);
+}
+
+.b5 {
+  right: 5%;
+  top: 38%;
+  width: 15%;
+  height: 20%;
+}
+
+.b6 {
+  left: 6%;
+  bottom: 6%;
+  width: 15%;
+  height: 13%;
+}
+
+.b7 {
+  left: 38%;
+  bottom: 6%;
+  width: 17%;
+  height: 13%;
+}
+
+.b8 {
+  right: 6%;
+  bottom: 6%;
+  width: 14%;
+  height: 13%;
+}

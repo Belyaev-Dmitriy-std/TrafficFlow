@@ -1,0 +1,12 @@
+{
+  "name": "traffic-ai-simulation",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && go run main.go",
+    "frontend": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
