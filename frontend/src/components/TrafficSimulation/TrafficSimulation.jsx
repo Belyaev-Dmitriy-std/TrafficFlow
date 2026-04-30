@@ -258,11 +258,6 @@ export default function TrafficSimulation() {
       <section className="traffic-header">
         <span>Go backend + Rule/Gemini agent</span>
         <h1>Traffic AI Simulation</h1>
-        <p>
-          Мини-город из 4 связанных перекрёстков. В rule-based режиме решения
-          принимаются мгновенно на фронте, а Gemini получает весь город одним
-          batch-запросом.
-        </p>
       </section>
 
       <section className="city-layout">
