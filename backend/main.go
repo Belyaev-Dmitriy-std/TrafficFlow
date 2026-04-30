@@ -30,7 +30,7 @@ type BatchResponse struct {
 }
 
 func enableCORS(w http.ResponseWriter) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 }
@@ -172,8 +172,13 @@ func main() {
 	http.HandleFunc("/api/decision-batch", decisionBatchHandler)
 	http.HandleFunc("/api/mode", modeHandler)
 
-	log.Println("Server started on http://localhost:8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	log.Println("Server started on port:", port)
 	log.Println("Agent mode:", agentMode)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
