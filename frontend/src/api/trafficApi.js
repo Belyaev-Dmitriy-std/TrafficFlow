@@ -1,5 +1,7 @@
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 export async function fetchDecision(state) {
-  const response = await fetch("http://localhost:8080/api/decision", {
+  const response = await fetch(`${API_URL}/api/decision`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +17,7 @@ export async function fetchDecision(state) {
 }
 
 export async function fetchCityDecisions(city) {
-  const response = await fetch("http://localhost:8080/api/decision-batch", {
+  const response = await fetch(`${API_URL}/api/decision-batch`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +35,7 @@ export async function fetchCityDecisions(city) {
 }
 
 export async function setAgentMode(mode) {
-  const response = await fetch("http://localhost:8080/api/mode", {
+  const response = await fetch(`${API_URL}/api/mode`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
